@@ -89,7 +89,7 @@ function getCss(theme: string, fontSize: string) {
     }
     
     .heading {
-        font-serif: font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+        font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: ${sanitizeHtml(fontSize)};
         font-style: normal;
         color: ${foreground};
