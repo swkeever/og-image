@@ -22,6 +22,8 @@ function getCss(theme: string, fontSize: string) {
         softForeground = '#94a3b8'
     }
     return `
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap');
+    
     @font-face {
         font-family: 'Vera';
         font-style: normal;
@@ -73,7 +75,7 @@ function getCss(theme: string, fontSize: string) {
 
     .plus {
         color: #BBB;
-        font-family: Times New Roman, Verdana;
+        font-family: "Times New Roman", Verdana;
         font-size: 100px;
     }
 
@@ -89,7 +91,7 @@ function getCss(theme: string, fontSize: string) {
     }
     
     .heading {
-        font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+        font-family: "Libre Baskerville", serif;
         font-size: ${sanitizeHtml(fontSize)};
         font-style: normal;
         color: ${foreground};

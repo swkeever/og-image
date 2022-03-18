@@ -183,7 +183,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
     };
     const {
         fileType = 'png',
-        fontSize = '175px',
+        fontSize = '150px',
         theme = 'light',
         md = true,
         text = 'Blur Placeholder Images with Next.js and mdx-bundler',
