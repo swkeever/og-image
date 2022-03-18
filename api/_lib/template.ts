@@ -1,41 +1,27 @@
+import {readFileSync} from 'fs';
+import {marked} from 'marked';
+import {sanitizeHtml} from './sanitizer';
+import {ParsedRequest} from './types';
 
-import { readFileSync } from 'fs';
-import { marked } from 'marked';
-import { sanitizeHtml } from './sanitizer';
-import { ParsedRequest } from './types';
 const twemoji = require('twemoji');
-const twOptions = { folder: 'svg', ext: '.svg' };
+const twOptions = {folder: 'svg', ext: '.svg'};
 const emojify = (text: string) => twemoji.parse(text, twOptions);
 
-const rglr = readFileSync(`${__dirname}/../_fonts/Inter-Regular.woff2`).toString('base64');
-const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString('base64');
+// const rglr = readFileSync(`${__dirname}/../_fonts/Inter-Regular.woff2`).toString('base64');
+// const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString('base64');
 const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('base64');
 
 function getCss(theme: string, fontSize: string) {
     let background = 'white';
-    let foreground = 'black';
-    let radial = 'lightgray';
+    let foreground = '#0f172a';
+    let softForeground = '#475569'
 
     if (theme === 'dark') {
-        background = 'black';
+        background = '#0f172a';
         foreground = 'white';
-        radial = 'dimgray';
+        softForeground = '#94a3b8'
     }
     return `
-    @font-face {
-        font-family: 'Inter';
-        font-style:  normal;
-        font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${rglr}) format('woff2');
-    }
-
-    @font-face {
-        font-family: 'Inter';
-        font-style:  normal;
-        font-weight: bold;
-        src: url(data:font/woff2;charset=utf-8;base64,${bold}) format('woff2');
-    }
-
     @font-face {
         font-family: 'Vera';
         font-style: normal;
@@ -45,13 +31,13 @@ function getCss(theme: string, fontSize: string) {
 
     body {
         background: ${background};
-        background-image: radial-gradient(circle at 25px 25px, ${radial} 2%, transparent 0%), radial-gradient(circle at 75px 75px, ${radial} 2%, transparent 0%);
         background-size: 100px 100px;
         height: 100vh;
         display: flex;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
+        text-align: left;
+        align-items: flex-end;
+        justify-content: flex-start;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23${theme === 'dark' ? '1e293b' : 'f1f5f9'}' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
     code {
@@ -68,13 +54,21 @@ function getCss(theme: string, fontSize: string) {
     .logo-wrapper {
         display: flex;
         align-items: center;
-        align-content: center;
-        justify-content: center;
-        justify-items: center;
+        align-content: flex-start;
+        justify-content: flex-start;
+        justify-items: flex-start;
+    }
+    
+    .website-name {
+        font-size: 80px;
+        font-weight: 500;
+        color: ${softForeground};
+        visibility: hidden;
     }
 
     .logo {
-        margin: 0 75px;
+        margin: 0 48px;
+        border-radius: 9999px;
     }
 
     .plus {
@@ -84,7 +78,7 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .spacer {
-        margin: 150px;
+        margin: 48px;
     }
 
     .emoji {
@@ -95,12 +89,21 @@ function getCss(theme: string, fontSize: string) {
     }
     
     .heading {
-        font-family: 'Inter', sans-serif;
+        font-serif: font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
         font-size: ${sanitizeHtml(fontSize)};
         font-style: normal;
         color: ${foreground};
-        line-height: 1.8;
-    }`;
+        font-weight: 800;
+        line-height: 1.1111111;
+        text-align: left;
+    }
+    
+    .heading > p {
+        margin-top: 0;
+    }
+    `;
+
+
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
@@ -120,8 +123,11 @@ export function getHtml(parsedReq: ParsedRequest) {
                 ${images.map((img, i) =>
                     getPlusSign(i) + getImage(img, widths[i], heights[i])
                 ).join('')}
+                                            <span class="website-name">swkeever.com</span>
+
             </div>
             <div class="spacer">
+
             <div class="heading">${emojify(
                 md ? marked(text) : sanitizeHtml(text)
             )}
@@ -131,7 +137,7 @@ export function getHtml(parsedReq: ParsedRequest) {
 </html>`;
 }
 
-function getImage(src: string, width ='auto', height = '225') {
+function getImage(src: string, width ='auto', height = '300') {
     return `<img
         class="logo"
         alt="Generated Image"
