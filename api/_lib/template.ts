@@ -35,9 +35,11 @@ function getCss(theme: string, fontSize: string) {
         background: ${background};
         background-size: 100px 100px;
         height: 100vh;
+        margin: 64px;
         display: flex;
+        flex-direction: column;
         text-align: left;
-        align-items: flex-end;
+        align-items: flex-start;
         justify-content: flex-start;
         background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23${theme === 'dark' ? '1e293b' : 'f1f5f9'}' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
@@ -54,11 +56,9 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .logo-wrapper {
-        display: flex;
-        align-items: center;
-        align-content: flex-start;
-        justify-content: flex-start;
-        justify-items: flex-start;
+        position: absolute;
+        bottom: -72px;
+        right: -96px;
     }
     
     .website-name {
@@ -70,7 +70,6 @@ function getCss(theme: string, fontSize: string) {
 
     .logo {
         margin: 0 48px;
-        border-radius: 9999px;
     }
 
     .plus {
@@ -98,6 +97,7 @@ function getCss(theme: string, fontSize: string) {
         font-weight: 800;
         line-height: 1.1111111;
         text-align: left;
+        width: 66.6666666%
     }
     
     .heading > p {
@@ -119,27 +119,21 @@ export function getHtml(parsedReq: ParsedRequest) {
         ${getCss(theme, fontSize)}
     </style>
     <body>
-        <div>
-            <div class="spacer">
-            <div class="logo-wrapper">
-                ${images.map((img, i) =>
-                    getPlusSign(i) + getImage(img, widths[i], heights[i])
-                ).join('')}
-                                            <span class="website-name">swkeever.com</span>
+        <div class="heading">${emojify(
+            md ? marked(text) : sanitizeHtml(text)
+        )}
+        </div>
+         <div class="logo-wrapper">
+            ${images.map((img, i) =>
+    getPlusSign(i) + getImage(img, widths[i], heights[i])
+).join('')}
 
-            </div>
-            <div class="spacer">
-
-            <div class="heading">${emojify(
-                md ? marked(text) : sanitizeHtml(text)
-            )}
-            </div>
         </div>
     </body>
 </html>`;
 }
 
-function getImage(src: string, width ='auto', height = '300') {
+function getImage(src: string, width ='auto', height = '1100') {
     return `<img
         class="logo"
         alt="Generated Image"
