@@ -35,7 +35,7 @@ function getCss(theme: string, fontSize: string) {
         background: ${background};
         background-size: 100px 100px;
         height: 100vh;
-        margin: 64px;
+        margin: 112px;
         display: flex;
         flex-direction: column;
         text-align: left;
@@ -57,8 +57,8 @@ function getCss(theme: string, fontSize: string) {
 
     .logo-wrapper {
         position: absolute;
-        bottom: -72px;
-        right: -96px;
+        bottom: 0px;
+        right: -48px;
     }
     
     .website-name {
