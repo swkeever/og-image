@@ -52,8 +52,8 @@ function getArray(stringOrArray: string[] | string | undefined): string[] {
 
 function getDefaultImages(images: string[], theme: Theme): string[] {
     const defaultImage = theme === 'light'
-        ? 'https://www.swkeever.com/avatar-removebg.png'
-        : 'https://www.swkeever.com/avatar-removebg.png';
+        ? 'https://www.skies.dev/avatar-removebg.png'
+        : 'https://www.skies.dev/avatar-removebg.png';
 
     if (!images || !images[0]) {
         return [defaultImage];
