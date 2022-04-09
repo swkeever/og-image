@@ -31,7 +31,7 @@ export function parseRequest(req: IncomingMessage) {
         text: decodeURIComponent(text),
         theme: theme === 'dark' ? 'dark' : 'light',
         md: md === '1' || md === 'true',
-        fontSize: fontSize || '125px',
+        fontSize: fontSize || '175px',
         images: getArray(images),
         widths: getArray(widths),
         heights: getArray(heights),
@@ -52,8 +52,8 @@ function getArray(stringOrArray: string[] | string | undefined): string[] {
 
 function getDefaultImages(images: string[], theme: Theme): string[] {
     const defaultImage = theme === 'light'
-        ? 'https://www.skies.dev/avatar-removebg.png'
-        : 'https://www.skies.dev/avatar-removebg.png';
+        ? 'https://www.skies.dev/logo.svg'
+        : 'https://www.skies.dev/logo.svg';
 
     if (!images || !images[0]) {
         return [defaultImage];

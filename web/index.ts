@@ -145,13 +145,13 @@ const markdownOptions: DropdownOption[] = [
 ];
 
 const imageLightOptions: DropdownOption[] = [
-    { text: 'Avatar', value: 'https://www.skies.dev/avatar-removebg.png' },
+    { text: 'Avatar', value: 'https://www.skies.dev/logo.svg' },
     { text: 'Next.js', value: 'https://assets.vercel.com/image/upload/front/assets/design/nextjs-black-logo.svg' },
     { text: 'Hyper', value: 'https://assets.vercel.com/image/upload/front/assets/design/hyper-color-logo.svg' },
 ];
 
 const imageDarkOptions: DropdownOption[] = [
-    { text: 'Avatar', value: 'https://www.skies.dev/avatar-removebg.png' },
+    { text: 'Avatar', value: 'https://www.skies.dev/logo.svg' },
     { text: 'Next.js', value: 'https://assets.vercel.com/image/upload/front/assets/design/nextjs-white-logo.svg' },
     { text: 'Hyper', value: 'https://assets.vercel.com/image/upload/front/assets/design/hyper-bw-logo.svg' },
 ];
@@ -183,7 +183,7 @@ const App = (_: any, state: AppState, setState: SetState) => {
     };
     const {
         fileType = 'png',
-        fontSize = '125px',
+        fontSize = '175px',
         theme = 'light',
         md = true,
         text = 'Blur Placeholder Images with Next.js and mdx-bundler',
